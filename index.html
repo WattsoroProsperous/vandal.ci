@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="VANDAL - L'art de la cuisine revisitée. Saveurs audacieuses, ambiance unique à Abidjan, Côte d'Ivoire.">
+    <meta name="keywords" content="restaurant, Abidjan, Côte d'Ivoire, cuisine, cocktails, VANDAL">
+    <title>VANDAL | L'art de la cuisine revisitée</title>
+    <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="assets/logo.jpg" alt="VANDAL Logo">
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="#accueil" class="nav-link">Accueil</a></li>
+                <li><a href="#about" class="nav-link">À Propos</a></li>
+                <li><a href="#menu" class="nav-link">Nos Plats</a></li>
+                <li><a href="#cocktails" class="nav-link">Cocktails</a></li>
+                <li><a href="#events" class="nav-link">Événements</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li><a href="#reservation" class="nav-link btn-reserve">Réserver</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="hero">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="assets/hero-bg.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-logo">
+                <img src="assets/logo-remove.png" alt="VANDAL Logo">
+            </div>
+            <p class="hero-subtitle">L'art de la cuisine revisitée</p>
+            <p class="hero-tagline">Saveurs audacieuses, ambiance unique</p>
+            <div class="hero-buttons">
+                <a href="#menu" class="btn btn-primary">Découvrir le Menu</a>
+                <a href="#reservation" class="btn btn-secondary">Réserver une Table</a>
+            </div>
+        </div>
+        <a href="#about" class="scroll-indicator">
+            <span></span>
+        </a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Bienvenue chez</span>
+                <h2 class="section-title">VANDAL</h2>
+                <div class="title-decoration"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="about-intro">Chez <strong>VANDAL</strong>, nous réinventons l'expérience culinaire avec audace et créativité.</p>
+                    <p>Notre cuisine allie saveurs locales et inspirations internationales pour créer des plats uniques qui éveillent vos papilles. Dans une ambiance chaleureuse et moderne, venez découvrir une expérience gastronomique inoubliable au cœur d'Abidjan.</p>
+                    <p>Du déjeuner au dîner, de l'apéritif au dernier verre, VANDAL vous accueille pour tous les moments de votre journée.</p>
+                </div>
+                <div class="about-video">
+                    <video controls playsinline id="main-about-video">
+                        <source src="assets/about us/Chez Vandal c’est l’ambiance et la bonne cuisine pour des prix imbattables 😍📍Localisation VAND.mp4" type="video/mp4">
+                    </video>
+                    <button class="video-play-btn" id="play-main-video" aria-label="Jouer la vidéo avec le son">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <polygon points="5,3 19,12 5,21"/>
+                        </svg>
+                        <span>Cliquez pour écouter</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Gallery vidéos About -->
+            <div class="about-gallery">
+                <div class="gallery-item">
+                    <video controls playsinline class="gallery-video" data-autoplay="true" id="featured-video">
+                        <source src="assets/about us/🍽️✨ Chez Vandal, c’est l’heure des bonnes affaires ! ✨🍽️ Du lundi au vendredi de 12h00 à 16h00.mp4" type="video/mp4">
+                    </video>
+                    <button class="video-play-btn" id="play-featured-video" aria-label="Jouer la vidéo avec le son">
+                        <svg viewBox="0 0 24 24" fill="currentColor">
+                            <polygon points="5,3 19,12 5,21"/>
+                        </svg>
+                        <span>Cliquez pour écouter</span>
+                    </button>
+                    <div class="gallery-overlay">
+                        <span>Offres du Midi</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <video controls playsinline class="gallery-video">
+                        <source src="assets/about us/Venez partager un Iftar gourmand et convivial chez Vandal Plaza – un moment de saveurs et de par.mp4" type="video/mp4">
+                    </video>
+                    <div class="gallery-overlay">
+                        <span>Moments Conviviaux</span>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <video controls playsinline class="gallery-video">
+                        <source src="assets/about us/Mon retour sur le restaurant @vandal.ci.mp4" type="video/mp4">
+                    </video>
+                    <div class="gallery-overlay">
+                        <span>Avis Clients</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-features">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3>Cuisine Créative</h3>
+                    <p>Des plats revisités avec audace et passion</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 8h1a4 4 0 1 1 0 8h-1M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3"/>
+                        </svg>
+                    </div>
+                    <h3>Cocktails d'Exception</h3>
+                    <p>Des créations uniques pour chaque moment</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                    </div>
+                    <h3>Ouvert Tard</h3>
+                    <p>Jusqu'à 01h en semaine, 02h le samedi</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Découvrez</span>
+                <h2 class="section-title">Nos Plats Signatures</h2>
+                <div class="title-decoration"></div>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="assets/nos plats/carre_dagneau.png" alt="Carrés d'Agneau Grillés">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Carrés d'Agneau Grillés</h3>
+                        <p>Tendres, parfumés au romarin, servis avec une purée onctueuse et une salade fraîche</p>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="assets/nos plats/Découvrez notre Salade Chicken & Avocado  poulet tendre mariné, avocat fondant, mangue sucrée, fruits secs croquants… un combo explosif de saveurs qui fait du bien..png" alt="Salade Chicken & Avocado">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Salade Chicken & Avocado</h3>
+                        <p>Poulet tendre mariné, avocat fondant, mangue sucrée, fruits secs croquants</p>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="assets/nos plats/Tagliatelles aux crevette Tagliatelles aux crevette.png" alt="Tagliatelles aux crevettes">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Tagliatelles aux Crevettes</h3>
+                        <p>Pâtes fraîches accompagnées de crevettes savoureuses</p>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="assets/nos plats/poulet grillé nappé d’une sauce crémeuse épicée, accompagné de son riz parfumé.png" alt="Poulet grillé sauce crémeuse">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Poulet Grillé Épicé</h3>
+                        <p>Nappé d'une sauce crémeuse épicée, accompagné de riz parfumé</p>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="assets/nos plats/pizza.png" alt="Pizza">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Pizza Artisanale</h3>
+                        <p>Pâte maison, ingrédients frais et saveurs authentiques</p>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="assets/nos plats/filets de poulet dorés à souhait, servis avec des frites bien chaudes, une salade fraîche et nos sauces maison irrésistibles.png" alt="Filets de poulet">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Filets de Poulet Dorés</h3>
+                        <p>Servis avec frites croustillantes, salade fraîche et sauces maison</p>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="assets/nos plats/déjeuner avec du riz.png" alt="Déjeuner avec riz">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Menu Déjeuner</h3>
+                        <p>Un délicieux repas accompagné de riz parfumé</p>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="assets/nos plats/Poulet sauce crème.png" alt="Poulet sauce crème">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Poulet Sauce Crème</h3>
+                        <p>Poulet tendre nappé d'une onctueuse sauce à la crème</p>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="assets/nos plats/pâtes al dente.png" alt="Pâtes al dente">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Pâtes Al Dente</h3>
+                        <p>Pâtes parfaitement cuites avec une sauce savoureuse</p>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="assets/nos plats/Découvrez ce magnifique saladier de Vandal... avec du poulet grillé, de l’avocat, des mangues, des noix et des feuilles de salade fraîches.png" alt="Saladier Vandal">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Saladier VANDAL</h3>
+                        <p>Poulet grillé, avocat, mangues, noix et salade fraîche</p>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-image">
+                        <img src="assets/nos plats/pause goûté.png" alt="Pause goûter">
+                    </div>
+                    <div class="menu-item-content">
+                        <h3>Pause Goûter</h3>
+                        <p>Une pause gourmande pour les petits creux</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cocktails Section -->
+    <section id="cocktails" class="cocktails">
+        <div class="container">
+            <div class="section-header light">
+                <span class="section-tag">Détendez-vous avec</span>
+                <h2 class="section-title">Nos Cocktails & Boissons</h2>
+                <div class="title-decoration"></div>
+            </div>
+            <div class="cocktails-content">
+                <div class="cocktail-video">
+                    <video autoplay muted loop playsinline>
+                        <source src="assets/nos coktailsn et café/C’est le temps de se faire plaisir avec un bon cocktail de chez @vandal.ci 😍📍 Localisation - L.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="cocktail-info">
+                    <h3>Des Créations Uniques</h3>
+                    <p>Notre bar vous propose une sélection raffinée de cocktails signatures, créés par nos mixologues passionnés. Des classiques revisités aux créations exclusives, chaque verre est une invitation au voyage.</p>
+                    <div class="cocktail-highlight">
+                        <img src="assets/nos coktailsn et café/Matcha Latte.png" alt="Matcha Latte">
+                        <div class="cocktail-highlight-text">
+                            <h4>Matcha Latte</h4>
+                            <p>Pour les amateurs de douceur et de bien-être</p>
+                        </div>
+                    </div>
+                    <p class="bar-note">Le bar reste ouvert jusqu'à la fermeture !</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="events">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Ne manquez pas</span>
+                <h2 class="section-title">Nos Événements</h2>
+                <div class="title-decoration"></div>
+            </div>
+            <div class="events-grid">
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="assets/events/open chicken wings tout les mardi.png" alt="Open Chicken Wings">
+                    </div>
+                    <div class="event-content">
+                        <span class="event-day">Tous les Mardis</span>
+                        <h3>Open Chicken Wings</h3>
+                        <p>Des ailes de poulet à volonté pour les amateurs de saveurs</p>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <div class="event-image">
+                        <img src="assets/events/open pizza tout les mercredi.png" alt="Open Pizza">
+                    </div>
+                    <div class="event-content">
+                        <span class="event-day">Tous les Mercredis</span>
+                        <h3>Open Pizza</h3>
+                        <p>Pizzas artisanales à volonté pour régaler toute la famille</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours & Location Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="section-header left">
+                        <span class="section-tag">Retrouvez-nous</span>
+                        <h2 class="section-title">Horaires & Contact</h2>
+                        <div class="title-decoration"></div>
+                    </div>
+                    <div class="hours">
+                        <h3>Horaires d'ouverture</h3>
+                        <ul class="hours-list">
+                            <li>
+                                <span class="day">Lundi - Vendredi</span>
+                                <span class="time">12h00 → 01h00</span>
+                            </li>
+                            <li>
+                                <span class="day">Samedi</span>
+                                <span class="time">12h00 → 02h00</span>
+                            </li>
+                            <li>
+                                <span class="day">Dimanche</span>
+                                <span class="time">12h00 → 01h00</span>
+                            </li>
+                        </ul>
+                        <p class="kitchen-note">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M12 8v4M12 16h.01"/>
+                            </svg>
+                            La cuisine ferme 1h avant la fermeture du restaurant, mais le bar reste ouvert jusqu'au bout.
+                        </p>
+                    </div>
+                    <div class="address">
+                        <h3>Adresse</h3>
+                        <p>Le Mall Garden Plaza – Angré<br>Abidjan, Côte d'Ivoire</p>
+                    </div>
+                    <div class="contact-methods">
+                        <h3>Contact</h3>
+                        <a href="tel:0700005555" class="contact-link phone">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                            07 00 00 55 55
+                        </a>
+                        <a href="https://instagram.com/Vandal.ci" target="_blank" rel="noopener" class="contact-link instagram">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                            </svg>
+                            @Vandal.ci
+                        </a>
+                        <a href="https://vandal.ci" target="_blank" rel="noopener" class="contact-link website">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                            vandal.ci
+                        </a>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3972.5!2d-3.99!3d5.38!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNcKwMjInNDgiTiAzwrA1OSc0MCJX!5e0!3m2!1sfr!2sci!4v1702500000000"
+                        width="100%"
+                        height="100%"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section id="reservation" class="reservation">
+        <div class="container">
+            <div class="section-header light">
+                <span class="section-tag">Planifiez votre visite</span>
+                <h2 class="section-title">Réserver une Table</h2>
+                <div class="title-decoration"></div>
+            </div>
+            <div class="reservation-content">
+                <p class="reservation-text">Pour une expérience inoubliable chez VANDAL, réservez votre table dès maintenant.</p>
+                <div class="reservation-cta">
+                    <a href="tel:0700005555" class="btn btn-primary btn-large">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                        Appeler pour Réserver
+                    </a>
+                    <a href="https://instagram.com/Vandal.ci" target="_blank" rel="noopener" class="btn btn-secondary btn-large">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                        </svg>
+                        Réserver sur Instagram
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo-wrapper">
+                        <img src="assets/logo.jpg" alt="VANDAL Logo" class="footer-logo">
+                    </div>
+                    <p class="footer-tagline">L'art de la cuisine revisitée</p>
+                    <p class="footer-description">Saveurs audacieuses, ambiance unique au cœur d'Abidjan</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="#accueil">Accueil</a></li>
+                        <li><a href="#about">À Propos</a></li>
+                        <li><a href="#menu">Nos Plats</a></li>
+                        <li><a href="#cocktails">Cocktails</a></li>
+                        <li><a href="#events">Événements</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p>Le Mall Garden Plaza – Angré<br>Abidjan, Côte d'Ivoire</p>
+                    <p><a href="tel:0700005555">07 00 00 55 55</a></p>
+                    <div class="footer-hours">
+                        <p><strong>Lun-Dim:</strong> 12h00 - 01h00</p>
+                        <p><strong>Samedi:</strong> 12h00 - 02h00</p>
+                    </div>
+                </div>
+                <div class="footer-social">
+                    <h4>Suivez-nous</h4>
+                    <p>Restez connectés pour découvrir nos nouveautés</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/Vandal.ci" target="_blank" rel="noopener" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 VANDAL. Tous droits réservés.</p>
+                    <p class="footer-made">Fait avec passion à Abidjan</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
