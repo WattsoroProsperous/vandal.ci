@@ -7,12 +7,28 @@
     <meta name="keywords" content="restaurant, Abidjan, Côte d'Ivoire, cuisine, cocktails, VANDAL">
     <title>VANDAL | L'art de la cuisine revisitée</title>
     <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
+    <!-- Preload critical assets -->
+    <link rel="preload" href="assets/logo.jpg" as="image">
+    <link rel="preload" href="assets/logo-remove.png" as="image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" as="style">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <img src="assets/logo-remove.png" alt="VANDAL" class="preloader-logo">
+            <div class="preloader-text">VANDAL</div>
+            <div class="preloader-progress">
+                <div class="preloader-bar" id="preloader-bar"></div>
+            </div>
+            <div class="preloader-percentage" id="preloader-percentage">0%</div>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
@@ -161,7 +177,7 @@
             <div class="menu-grid">
                 <div class="menu-item">
                     <div class="menu-item-image">
-                        <img src="assets/nos plats/carre_dagneau.png" alt="Carrés d'Agneau Grillés">
+                        <img src="assets/nos plats/carre_dagneau.png" alt="Carrés d'Agneau Grillés" loading="lazy" decoding="async">
                     </div>
                     <div class="menu-item-content">
                         <h3>Carrés d'Agneau Grillés</h3>
@@ -170,7 +186,7 @@
                 </div>
                 <div class="menu-item">
                     <div class="menu-item-image">
-                        <img src="assets/nos plats/Découvrez notre Salade Chicken & Avocado  poulet tendre mariné, avocat fondant, mangue sucrée, fruits secs croquants… un combo explosif de saveurs qui fait du bien..png" alt="Salade Chicken & Avocado">
+                        <img src="assets/nos plats/Découvrez notre Salade Chicken & Avocado  poulet tendre mariné, avocat fondant, mangue sucrée, fruits secs croquants… un combo explosif de saveurs qui fait du bien..png" alt="Salade Chicken & Avocado" loading="lazy" decoding="async">
                     </div>
                     <div class="menu-item-content">
                         <h3>Salade Chicken & Avocado</h3>
@@ -179,7 +195,7 @@
                 </div>
                 <div class="menu-item">
                     <div class="menu-item-image">
-                        <img src="assets/nos plats/Tagliatelles aux crevette Tagliatelles aux crevette.png" alt="Tagliatelles aux crevettes">
+                        <img src="assets/nos plats/Tagliatelles aux crevette Tagliatelles aux crevette.png" alt="Tagliatelles aux crevettes" loading="lazy" decoding="async">
                     </div>
                     <div class="menu-item-content">
                         <h3>Tagliatelles aux Crevettes</h3>
@@ -188,7 +204,7 @@
                 </div>
                 <div class="menu-item">
                     <div class="menu-item-image">
-                        <img src="assets/nos plats/poulet grillé nappé d’une sauce crémeuse épicée, accompagné de son riz parfumé.png" alt="Poulet grillé sauce crémeuse">
+                        <img src="assets/nos plats/poulet grillé nappé d’une sauce crémeuse épicée, accompagné de son riz parfumé.png" alt="Poulet grillé sauce crémeuse" loading="lazy" decoding="async">
                     </div>
                     <div class="menu-item-content">
                         <h3>Poulet Grillé Épicé</h3>
@@ -197,7 +213,7 @@
                 </div>
                 <div class="menu-item">
                     <div class="menu-item-image">
-                        <img src="assets/nos plats/pizza.png" alt="Pizza">
+                        <img src="assets/nos plats/pizza.png" alt="Pizza" loading="lazy" decoding="async">
                     </div>
                     <div class="menu-item-content">
                         <h3>Pizza Artisanale</h3>
@@ -206,7 +222,7 @@
                 </div>
                 <div class="menu-item">
                     <div class="menu-item-image">
-                        <img src="assets/nos plats/filets de poulet dorés à souhait, servis avec des frites bien chaudes, une salade fraîche et nos sauces maison irrésistibles.png" alt="Filets de poulet">
+                        <img src="assets/nos plats/filets de poulet dorés à souhait, servis avec des frites bien chaudes, une salade fraîche et nos sauces maison irrésistibles.png" alt="Filets de poulet" loading="lazy" decoding="async">
                     </div>
                     <div class="menu-item-content">
                         <h3>Filets de Poulet Dorés</h3>
@@ -215,7 +231,7 @@
                 </div>
                 <div class="menu-item">
                     <div class="menu-item-image">
-                        <img src="assets/nos plats/déjeuner avec du riz.png" alt="Déjeuner avec riz">
+                        <img src="assets/nos plats/déjeuner avec du riz.png" alt="Déjeuner avec riz" loading="lazy" decoding="async">
                     </div>
                     <div class="menu-item-content">
                         <h3>Menu Déjeuner</h3>
@@ -224,7 +240,7 @@
                 </div>
                 <div class="menu-item">
                     <div class="menu-item-image">
-                        <img src="assets/nos plats/Poulet sauce crème.png" alt="Poulet sauce crème">
+                        <img src="assets/nos plats/Poulet sauce crème.png" alt="Poulet sauce crème" loading="lazy" decoding="async">
                     </div>
                     <div class="menu-item-content">
                         <h3>Poulet Sauce Crème</h3>
@@ -233,7 +249,7 @@
                 </div>
                 <div class="menu-item">
                     <div class="menu-item-image">
-                        <img src="assets/nos plats/pâtes al dente.png" alt="Pâtes al dente">
+                        <img src="assets/nos plats/pâtes al dente.png" alt="Pâtes al dente" loading="lazy" decoding="async">
                     </div>
                     <div class="menu-item-content">
                         <h3>Pâtes Al Dente</h3>
@@ -242,7 +258,7 @@
                 </div>
                 <div class="menu-item">
                     <div class="menu-item-image">
-                        <img src="assets/nos plats/Découvrez ce magnifique saladier de Vandal... avec du poulet grillé, de l’avocat, des mangues, des noix et des feuilles de salade fraîches.png" alt="Saladier Vandal">
+                        <img src="assets/nos plats/saladier.png" alt="Saladier Vandal" loading="lazy" decoding="async">
                     </div>
                     <div class="menu-item-content">
                         <h3>Saladier VANDAL</h3>
@@ -251,7 +267,7 @@
                 </div>
                 <div class="menu-item">
                     <div class="menu-item-image">
-                        <img src="assets/nos plats/pause goûté.png" alt="Pause goûter">
+                        <img src="assets/nos plats/pause goûté.png" alt="Pause goûter" loading="lazy" decoding="async">
                     </div>
                     <div class="menu-item-content">
                         <h3>Pause Goûter</h3>
@@ -280,7 +296,7 @@
                     <h3>Des Créations Uniques</h3>
                     <p>Notre bar vous propose une sélection raffinée de cocktails signatures, créés par nos mixologues passionnés. Des classiques revisités aux créations exclusives, chaque verre est une invitation au voyage.</p>
                     <div class="cocktail-highlight">
-                        <img src="assets/nos coktailsn et café/Matcha Latte.png" alt="Matcha Latte">
+                        <img src="assets/nos coktailsn et café/Matcha Latte.png" alt="Matcha Latte" loading="lazy" decoding="async">
                         <div class="cocktail-highlight-text">
                             <h4>Matcha Latte</h4>
                             <p>Pour les amateurs de douceur et de bien-être</p>
@@ -303,7 +319,7 @@
             <div class="events-grid">
                 <div class="event-card">
                     <div class="event-image">
-                        <img src="assets/events/open chicken wings tout les mardi.png" alt="Open Chicken Wings">
+                        <img src="assets/events/open chicken wings tout les mardi.png" alt="Open Chicken Wings" loading="lazy" decoding="async">
                     </div>
                     <div class="event-content">
                         <span class="event-day">Tous les Mardis</span>
@@ -313,7 +329,7 @@
                 </div>
                 <div class="event-card">
                     <div class="event-image">
-                        <img src="assets/events/open pizza tout les mercredi.png" alt="Open Pizza">
+                        <img src="assets/events/open pizza tout les mercredi.png" alt="Open Pizza" loading="lazy" decoding="async">
                     </div>
                     <div class="event-content">
                         <span class="event-day">Tous les Mercredis</span>
@@ -440,7 +456,7 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <div class="footer-logo-wrapper">
-                        <img src="assets/logo.jpg" alt="VANDAL Logo" class="footer-logo">
+                        <img src="assets/logo.jpg" alt="VANDAL Logo" class="footer-logo" loading="lazy" decoding="async">
                     </div>
                     <p class="footer-tagline">L'art de la cuisine revisitée</p>
                     <p class="footer-description">Saveurs audacieuses, ambiance unique au cœur d'Abidjan</p>

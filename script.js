@@ -3,6 +3,9 @@
  * Interactive features and animations
  */
 
+// Initialize preloader immediately
+initPreloader();
+
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all features
     initNavigation();
@@ -12,6 +15,122 @@ document.addEventListener('DOMContentLoaded', function() {
     initLazyLoading();
     initGalleryVideos();
 });
+
+/**
+ * Preloader with image loading progress
+ */
+function initPreloader() {
+    const preloader = document.getElementById('preloader');
+    const progressBar = document.getElementById('preloader-bar');
+    const percentageText = document.getElementById('preloader-percentage');
+
+    if (!preloader) return;
+
+    // Get all images to preload
+    const imagesToLoad = [];
+
+    // Critical images (above the fold)
+    const criticalImages = [
+        'assets/logo.jpg',
+        'assets/logo-remove.png'
+    ];
+
+    // Add critical images first
+    criticalImages.forEach(src => {
+        imagesToLoad.push({ src, priority: 'high' });
+    });
+
+    // Wait for DOM to be ready to find all other images
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => collectAndLoadImages());
+    } else {
+        collectAndLoadImages();
+    }
+
+    function collectAndLoadImages() {
+        // Find all images in the page
+        const pageImages = document.querySelectorAll('img[src]');
+        pageImages.forEach(img => {
+            const src = img.getAttribute('src');
+            if (src && !imagesToLoad.find(i => i.src === src)) {
+                imagesToLoad.push({ src, priority: 'normal' });
+            }
+        });
+
+        // Also preload background videos poster frames if any
+        const videos = document.querySelectorAll('video[poster]');
+        videos.forEach(video => {
+            const poster = video.getAttribute('poster');
+            if (poster) {
+                imagesToLoad.push({ src: poster, priority: 'normal' });
+            }
+        });
+
+        loadAllImages();
+    }
+
+    function loadAllImages() {
+        let loadedCount = 0;
+        const totalImages = imagesToLoad.length;
+
+        if (totalImages === 0) {
+            completeLoading();
+            return;
+        }
+
+        // Update progress
+        function updateProgress() {
+            loadedCount++;
+            const percentage = Math.round((loadedCount / totalImages) * 100);
+
+            if (progressBar) {
+                progressBar.style.width = percentage + '%';
+            }
+            if (percentageText) {
+                percentageText.textContent = percentage + '%';
+            }
+
+            if (loadedCount >= totalImages) {
+                completeLoading();
+            }
+        }
+
+        // Load each image
+        imagesToLoad.forEach(imageData => {
+            const img = new Image();
+            img.onload = updateProgress;
+            img.onerror = updateProgress; // Count errors as loaded to not block
+            img.src = imageData.src;
+        });
+
+        // Fallback: complete after max 5 seconds even if not all loaded
+        setTimeout(() => {
+            if (!preloader.classList.contains('loaded')) {
+                completeLoading();
+            }
+        }, 5000);
+    }
+
+    function completeLoading() {
+        // Ensure we show 100%
+        if (progressBar) progressBar.style.width = '100%';
+        if (percentageText) percentageText.textContent = '100%';
+
+        // Small delay to show 100% before hiding
+        setTimeout(() => {
+            preloader.classList.add('loaded');
+            document.body.style.overflow = '';
+
+            // Remove preloader from DOM after animation
+            setTimeout(() => {
+                preloader.remove();
+            }, 500);
+        }, 300);
+    }
+
+    // Prevent scrolling while preloader is active
+    document.body.style.overflow = 'hidden';
+}
 
 /**
  * Navigation functionality
@@ -316,7 +435,7 @@ function setupVideoWithPlayButton(video, playButton, allGalleryVideos) {
  */
 function setupMainAboutVideo(video, playButton, allGalleryVideos) {
     let isPlaying = false;
-    let hasUnmuted = false;
+    let userHasInteracted = false;
 
     // Function to pause other videos
     const pauseOtherVideos = () => {
@@ -329,49 +448,76 @@ function setupMainAboutVideo(video, playButton, allGalleryVideos) {
         }
     };
 
-    // Function to play video (muted first for autoplay, then unmute on click)
-    const playVideo = (withSound = false) => {
+    // Function to start video when section is visible
+    const startVideo = () => {
         pauseOtherVideos();
 
-        if (withSound) {
+        // If user already interacted, play with sound directly
+        if (userHasInteracted) {
             video.muted = false;
-            hasUnmuted = true;
+            video.play().then(() => {
+                playButton.classList.add('hidden');
+                isPlaying = true;
+            }).catch(() => {
+                playButton.classList.remove('hidden');
+            });
+            return;
         }
 
-        return video.play().then(() => {
-            if (withSound || hasUnmuted) {
-                playButton.classList.add('hidden');
-            }
+        // First attempt: try with sound (will work if user interacted with page)
+        video.muted = false;
+        video.play().then(() => {
+            // Success with sound!
+            playButton.classList.add('hidden');
             isPlaying = true;
+            userHasInteracted = true;
         }).catch(() => {
-            // Autoplay blocked, try muted
-            if (!video.muted) {
-                video.muted = true;
-                video.play().then(() => {
-                    isPlaying = true;
-                    // Show button to unmute
-                    playButton.classList.remove('hidden');
-                }).catch(() => {
-                    playButton.classList.remove('hidden');
-                });
-            }
+            // Sound blocked, play muted and show button for sound
+            video.muted = true;
+            video.play().then(() => {
+                isPlaying = true;
+                // Show button so user can enable sound
+                playButton.classList.remove('hidden');
+            }).catch(() => {
+                // Even muted playback failed
+                playButton.classList.remove('hidden');
+            });
         });
     };
 
-    // Click/touch on play button to unmute and play
+    // Click/touch on play button to enable sound
     const handlePlayButtonClick = function(e) {
         e.preventDefault();
         e.stopPropagation();
-        playVideo(true);
+        userHasInteracted = true;
+        pauseOtherVideos();
+        video.muted = false;
+        video.play().then(() => {
+            playButton.classList.add('hidden');
+            isPlaying = true;
+        }).catch(() => {
+            // Fallback: just unmute if already playing
+            if (!video.paused) {
+                video.muted = false;
+                playButton.classList.add('hidden');
+            }
+        });
     };
 
     playButton.addEventListener('click', handlePlayButtonClick);
     playButton.addEventListener('touchend', handlePlayButtonClick, { passive: false });
 
-    // Hide play button if video is playing with sound
+    // Track user interaction on the page
+    const markInteraction = () => {
+        userHasInteracted = true;
+    };
+    document.addEventListener('click', markInteraction, { once: true });
+    document.addEventListener('touchstart', markInteraction, { once: true });
+
+    // Hide play button when video plays with sound
     video.addEventListener('play', function() {
         isPlaying = true;
-        if (hasUnmuted || !video.muted) {
+        if (!video.muted) {
             playButton.classList.add('hidden');
         }
     });
@@ -380,7 +526,6 @@ function setupMainAboutVideo(video, playButton, allGalleryVideos) {
     video.addEventListener('ended', function() {
         playButton.classList.remove('hidden');
         isPlaying = false;
-        hasUnmuted = false;
     });
 
     video.addEventListener('pause', function() {
@@ -391,10 +536,9 @@ function setupMainAboutVideo(video, playButton, allGalleryVideos) {
     const videoObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Section is visible - try to play
+                // Section is visible - start video
                 if (!isPlaying) {
-                    // Try to play with sound if already unmuted, otherwise muted
-                    playVideo(hasUnmuted);
+                    startVideo();
                 }
             } else {
                 // Section is not visible - pause video
@@ -493,15 +637,3 @@ document.addEventListener('visibilitychange', function() {
     }
 });
 
-/**
- * Preloader (optional)
- */
-window.addEventListener('load', function() {
-    const preloader = document.querySelector('.preloader');
-    if (preloader) {
-        preloader.classList.add('loaded');
-        setTimeout(() => {
-            preloader.style.display = 'none';
-        }, 500);
-    }
-});
