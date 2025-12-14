@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /**
- * Preloader with image loading progress
+ * Preloader with optimized loading - critical assets first, then background loading
  */
 function initPreloader() {
     const preloader = document.getElementById('preloader');
@@ -26,97 +26,103 @@ function initPreloader() {
 
     if (!preloader) return;
 
-    // Get all images to preload
-    const imagesToLoad = [];
+    // Prevent scrolling while preloader is active
+    document.body.style.overflow = 'hidden';
 
-    // Critical images (above the fold)
-    const criticalImages = [
-        'assets/logo.jpg',
-        'assets/logo-remove.png'
+    // Critical assets (must load before showing page)
+    const criticalAssets = [
+        { src: 'assets/logo.jpg', type: 'image' },
+        { src: 'assets/logo-remove.png', type: 'image' }
     ];
 
-    // Add critical images first
-    criticalImages.forEach(src => {
-        imagesToLoad.push({ src, priority: 'high' });
-    });
+    // Track loading progress
+    let criticalLoaded = 0;
+    const totalCritical = criticalAssets.length;
 
-    // Wait for DOM to be ready to find all other images
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => collectAndLoadImages());
-    } else {
-        collectAndLoadImages();
-    }
-
-    function collectAndLoadImages() {
-        // Find all images in the page
-        const pageImages = document.querySelectorAll('img[src]');
-        pageImages.forEach(img => {
-            const src = img.getAttribute('src');
-            if (src && !imagesToLoad.find(i => i.src === src)) {
-                imagesToLoad.push({ src, priority: 'normal' });
-            }
-        });
-
-        // Also preload background videos poster frames if any
-        const videos = document.querySelectorAll('video[poster]');
-        videos.forEach(video => {
-            const poster = video.getAttribute('poster');
-            if (poster) {
-                imagesToLoad.push({ src: poster, priority: 'normal' });
-            }
-        });
-
-        loadAllImages();
-    }
-
-    function loadAllImages() {
-        let loadedCount = 0;
-        const totalImages = imagesToLoad.length;
-
-        if (totalImages === 0) {
-            completeLoading();
-            return;
+    // Update progress bar
+    function updateProgress(loaded, total, phase) {
+        let percentage;
+        if (phase === 'critical') {
+            // Critical phase: 0-70%
+            percentage = Math.round((loaded / total) * 70);
+        } else {
+            // Hero video phase: 70-100%
+            percentage = 70 + Math.round((loaded / total) * 30);
         }
 
-        // Update progress
-        function updateProgress() {
-            loadedCount++;
-            const percentage = Math.round((loadedCount / totalImages) * 100);
-
-            if (progressBar) {
-                progressBar.style.width = percentage + '%';
-            }
-            if (percentageText) {
-                percentageText.textContent = percentage + '%';
-            }
-
-            if (loadedCount >= totalImages) {
-                completeLoading();
-            }
+        if (progressBar) {
+            progressBar.style.width = percentage + '%';
         }
-
-        // Load each image
-        imagesToLoad.forEach(imageData => {
-            const img = new Image();
-            img.onload = updateProgress;
-            img.onerror = updateProgress; // Count errors as loaded to not block
-            img.src = imageData.src;
-        });
-
-        // Fallback: complete after max 5 seconds even if not all loaded
-        setTimeout(() => {
-            if (!preloader.classList.contains('loaded')) {
-                completeLoading();
-            }
-        }, 5000);
+        if (percentageText) {
+            percentageText.textContent = percentage + '%';
+        }
     }
 
+    // Load critical images first
+    function loadCriticalAssets() {
+        return new Promise((resolve) => {
+            if (totalCritical === 0) {
+                resolve();
+                return;
+            }
+
+            criticalAssets.forEach(asset => {
+                const img = new Image();
+                img.onload = img.onerror = () => {
+                    criticalLoaded++;
+                    updateProgress(criticalLoaded, totalCritical, 'critical');
+                    if (criticalLoaded >= totalCritical) {
+                        resolve();
+                    }
+                };
+                img.src = asset.src;
+            });
+
+            // Timeout fallback for critical assets (2 seconds max)
+            setTimeout(resolve, 2000);
+        });
+    }
+
+    // Check if hero video can play
+    function waitForHeroVideo() {
+        return new Promise((resolve) => {
+            const heroVideo = document.querySelector('.hero-video');
+
+            if (!heroVideo) {
+                updateProgress(1, 1, 'video');
+                resolve();
+                return;
+            }
+
+            let resolved = false;
+            const completeVideo = () => {
+                if (!resolved) {
+                    resolved = true;
+                    updateProgress(1, 1, 'video');
+                    resolve();
+                }
+            };
+
+            // Check if video is already ready
+            if (heroVideo.readyState >= 3) {
+                completeVideo();
+                return;
+            }
+
+            // Wait for video to be playable
+            heroVideo.addEventListener('canplay', completeVideo, { once: true });
+            heroVideo.addEventListener('loadeddata', completeVideo, { once: true });
+
+            // Fallback timeout (1.5 seconds max for video)
+            setTimeout(completeVideo, 1500);
+        });
+    }
+
+    // Complete loading and hide preloader
     function completeLoading() {
-        // Ensure we show 100%
         if (progressBar) progressBar.style.width = '100%';
         if (percentageText) percentageText.textContent = '100%';
 
-        // Small delay to show 100% before hiding
         setTimeout(() => {
             preloader.classList.add('loaded');
             document.body.style.overflow = '';
@@ -124,12 +130,66 @@ function initPreloader() {
             // Remove preloader from DOM after animation
             setTimeout(() => {
                 preloader.remove();
+                // Start loading remaining assets in background
+                loadRemainingAssetsInBackground();
             }, 500);
-        }, 300);
+        }, 200);
     }
 
-    // Prevent scrolling while preloader is active
-    document.body.style.overflow = 'hidden';
+    // Load remaining images in background (after preloader is hidden)
+    function loadRemainingAssetsInBackground() {
+        // Use requestIdleCallback for non-critical loading
+        const loadInBackground = () => {
+            const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+
+            lazyImages.forEach((img, index) => {
+                // Stagger loading to avoid network congestion
+                setTimeout(() => {
+                    // Trigger load by reading src (browser will prioritize visible images)
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                    }
+                }, index * 100);
+            });
+        };
+
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(loadInBackground, { timeout: 2000 });
+        } else {
+            setTimeout(loadInBackground, 100);
+        }
+    }
+
+    // Start loading sequence
+    async function startLoading() {
+        try {
+            // Phase 1: Load critical images (logos)
+            await loadCriticalAssets();
+
+            // Phase 2: Wait for hero video to be ready
+            await waitForHeroVideo();
+
+            // Complete and show page
+            completeLoading();
+        } catch (error) {
+            // On any error, just complete loading
+            completeLoading();
+        }
+    }
+
+    // Wait for DOM to be ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', startLoading);
+    } else {
+        startLoading();
+    }
+
+    // Ultimate fallback: complete after 4 seconds no matter what
+    setTimeout(() => {
+        if (!preloader.classList.contains('loaded')) {
+            completeLoading();
+        }
+    }, 4000);
 }
 
 /**

@@ -7,13 +7,20 @@
     <meta name="keywords" content="restaurant, Abidjan, Côte d'Ivoire, cuisine, cocktails, VANDAL">
     <title>VANDAL | L'art de la cuisine revisitée</title>
     <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
-    <!-- Preload critical assets -->
-    <link rel="preload" href="assets/logo.jpg" as="image">
-    <link rel="preload" href="assets/logo-remove.png" as="image">
+    <!-- Preconnect for faster external resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Preload critical assets (above the fold) -->
+    <link rel="preload" href="assets/logo.jpg" as="image" fetchpriority="high">
+    <link rel="preload" href="assets/logo-remove.png" as="image" fetchpriority="high">
+    <link rel="preload" href="assets/hero-bg.mp4" as="video" type="video/mp4" fetchpriority="high">
+
+    <!-- Fonts -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" as="style">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
